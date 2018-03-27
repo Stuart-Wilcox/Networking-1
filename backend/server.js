@@ -1,5 +1,7 @@
 var net = require('net');
 
+let Request = require('./Request');
+
 let server = net.createServer(c => {
 	console.log('Client connected');
 	c.on('end', () => {

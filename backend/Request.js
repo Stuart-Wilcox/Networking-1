@@ -1,3 +1,4 @@
+let Headers = require('./Headers');
 // SME request class
 class Request {
 	/**
@@ -15,22 +16,14 @@ class Request {
 		this.type = '';
 
 		for(let i = 0; i < protocolWords.length; i++) {
-			if(protocolWords[i].contains('SME') {
+			if(protocolWords[i].includes('SME')) {
 				this.protocol = protocolWords[i];
 			} else {
 				this.type += protocolWords[i];
 			}
 		}
 
-		let headers = line[1];
-		this.headers = [];
-		headers = headers.replace(': ', ':'); // get rid of spacing around the colons
-		headers = headers.split(' '); // split by spaces to get each header pair of name:value
-		for(let i = 0; i < headers.length; i++) {
-			const pair = headers[i].split(':');
-			if (pair.length >
-			this.headers.push({key: pair[0], value: pair[1]});
-		}
+		this.headers = new Headers(lines[1]);
 	}
 }
 

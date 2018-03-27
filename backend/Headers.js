@@ -5,6 +5,37 @@ class Headers {
 	constructor(headers) {
 		this.keys = [];
 		this.values = [];
+
+		headers = headers.replace(/: /g, ':'); // get rid of spacing after colon
+		headers += ' '; // add a space on the end
+
+		// change the header string into key/value pairs
+		let key = '';
+		let value = '';
+		let state = true;
+		for (let i = 0; i < headers.length; i++) {
+			if (state) {
+				// append the character to key unless its a colon
+				if(headers[i] == ':') {
+					state = false;
+					continue;
+				} else {
+					key += headers[i];
+				}
+			} else {
+				// append the character to value unless its a space
+				if(headers[i] == ' ') {
+					state = true; // flip the state
+					this.add(key, value); // add the key/value pair
+
+					// reset the key and value
+					key = '';
+					value = '';
+				} else {
+					value += headers[i];
+				}
+			}
+		}
 	}
 
 	add(key, value) {
