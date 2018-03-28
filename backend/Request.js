@@ -6,6 +6,7 @@ class Request {
 	*@param req is the request as a string
 	*/
 	constructor(req) {
+		this.reqString = req;
 		// split the lines
 		const lines = req.split('\r\n');
 		if(lines.length != 3 || lines[2] != '') {
@@ -25,7 +26,7 @@ class Request {
 			if(protocolWords[i].includes('SME')) {
 				this.protocol = protocolWords[i];
 			} else {
-				this.type += protocolWords[i];
+				this.type += protocolWords[i]; // this gets rid of any spaces
 			}
 		}
 
@@ -55,6 +56,10 @@ class Request {
 
 		// type was not found
 		throw new InvalidRequestError(`Invalid request. Specified request type "${this.type}" not understood.`);
+	}
+
+	toString() {
+		return this.reqString;
 	}
 }
 

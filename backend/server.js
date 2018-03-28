@@ -4,32 +4,38 @@ let Request = require('./Request');
 let Response = require('./Response');
 let Headers = require('./Headers');
 
-let server = net.createServer(c => {
-	console.log('***Client connected***\n');
-	c.on('end', () => {
-		console.log('***Client disconnected***\n');
-	});
+let server = net.createServer((c) => {
 
 	c.on('close', () => {
-		console.log('***Connection closed***\n');
+		console.log(`${c.id}'s session is closed.`);
 	});
 
 	c.on('data', (arg) => {
-		console.log('***Data Received***\n\n');
 		let req = arg.toString('ascii');
 
 		try{
 			req = new Request(req);
+			if (!c.id) {
+				c.id = req.headers.get('ID');
+				console.log(`Trader "${c.id}" at (${c.remoteAddress}:${c.remotePort}): is connected.\n`);
+			}
+			console.log(`${c.id} requests:\n${req}`);
 		} catch (err) {
+			console.log(`${c.id} requests:\n${req}`);
 			const failHeaders = new Headers();
 			failHeaders.add('Details', err.message);
 
-			return c.end(new Response('FAIL', failHeaders).toString());
+			const res = new Response('FAIL', failHeaders);
+
+			console.log(`Server response:\n${res.toString()}`);
+
+			return c.end(res.toString());
 		}
 
-		console.log(req);
-
 		let res = new Response('OK');
+
+		console.log(`Server response:\n${res.toString()}`);
+
 		c.write(res.toString());
 	});
 });
@@ -39,5 +45,5 @@ server.on('error', (err) => {
 });
 
 server.listen(8124, () => {
-	console.log(`Stock Exchange Server available at localhost:${server.address().port}`);
+	console.log(`Stock Exchange Server available at localhost:${server.address().port}\n\n\n`);
 });
