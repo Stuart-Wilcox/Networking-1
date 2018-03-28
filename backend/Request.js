@@ -1,5 +1,5 @@
 let Headers = require('./Headers');
-let InvalidRequestError = require('../InvalidRequestError');
+let InvalidRequestError = require('./InvalidRequestError');
 // SME request class
 class Request {
 	/**
@@ -39,9 +39,9 @@ class Request {
 		const approvedTypes = [
 			'REGISTER',
 			'UNREGISTER',
-			'LIST COMPANIES',
-			'LIST SELLORDERS',
-			'LIST BUYORDERS',
+			'LISTCOMPANIES',
+			'LISTSELLORDERS',
+			'LISTBUYORDERS',
 			'SELLORDER',
 			'BUYORDER',
 		];
