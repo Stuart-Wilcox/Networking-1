@@ -26,7 +26,7 @@ class Request {
 			if(protocolWords[i].includes('SME')) {
 				this.protocol = protocolWords[i];
 			} else {
-				this.type += protocolWords[i]; // this gets rid of any spaces
+				this.type += protocolWords[i].toUpperCase(); // this gets rid of any spaces
 			}
 		}
 
@@ -49,7 +49,7 @@ class Request {
 
 		// make sure the type is in the list (case insensitive)
 		for (let i = 0; i < approvedTypes.length; i++) {
-			if (this.type.toUpperCase() === approvedTypes[i]) {
+			if (this.type === approvedTypes[i]) {
 				return;
 			}
 		}
