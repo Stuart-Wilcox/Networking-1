@@ -1,5 +1,7 @@
 class Company {
-	constructor(name, ticker, openPrice) {
+	constructor(realtimeData, name, ticker, openPrice) {
+		this.realtimeData = realtimeData;
+
 		this.name = name;
 		this.ticker = ticker;
 		this.volume = 0;
@@ -19,6 +21,16 @@ class Company {
 
 	getVolume() {
 		return this.volume;
+	}
+
+	addOrder(order) {
+		// TODO check for a transaction
+		if(typeof(order) == 'BuyOrder') {
+			this.buyOrders.push(order);
+		} else if (type(order) == 'SellOrder') {
+			this.sellOrders.push(order);
+		}
+		this.realtimeData.notify();
 	}
 }
 

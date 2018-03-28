@@ -1,8 +1,11 @@
 class Order {
-	constructor(date, size, price) {
+	constructor(company, date, size, price) {
 		this.date = date;
 		this.size = size;
 		this.price = price;
+
+		this.company = company;
+		company.addOrder(this);
 	}
 
 	getPrice() {
