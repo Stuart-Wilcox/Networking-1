@@ -1,4 +1,5 @@
 let Headers = require('./Headers');
+let InvalidRequestError = require('../InvalidRequestError');
 // SME request class
 class Request {
 	/**
@@ -8,7 +9,12 @@ class Request {
 		// split the lines
 		const lines = req.split('\r\n');
 		if(lines.length != 3 || lines[2] != '') {
-			throw Error("Invalid request. Incorrect amount of lines.");
+			throw new InvalidRequestError("Invalid request. Incorrect amount of lines.");
+		}
+
+		// make sure the protocol is included
+		if (!lines[0].includes('SME')) {
+			throw new InvalidRequestError("Invalid request. Protocol absent or on wrong line.");
 		}
 
 		// split the first line by spaces
@@ -23,7 +29,32 @@ class Request {
 			}
 		}
 
+		// make sure the type is of an approved sort
+		this.checkType();
+
 		this.headers = new Headers(lines[1]);
+	}
+
+	checkType() {
+		const approvedTypes = [
+			'REGISTER',
+			'UNREGISTER',
+			'LIST COMPANIES',
+			'LIST SELLORDERS',
+			'LIST BUYORDERS',
+			'SELLORDER',
+			'BUYORDER',
+		];
+
+		// make sure the type is in the list (case insensitive)
+		for (let i = 0; i < approvedTypes.length; i++) {
+			if (this.type.toUpperCase() === approvedTypes[i]) {
+				return;
+			}
+		}
+
+		// type was not found
+		throw new InvalidRequestError(`Invalid request. Specified request type "${this.type}" not understood.`);
 	}
 }
 

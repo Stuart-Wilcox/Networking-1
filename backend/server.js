@@ -16,7 +16,11 @@ let server = net.createServer(c => {
 	c.on('data', (arg) => {
 		let req = arg.toString('ascii');
 
-		req = new Request(req);
+		try{
+			req = new Request(req);
+		} catch (Error) {
+			c.write(new Response().toString());
+		}
 
 		console.log(req);
 
@@ -29,6 +33,6 @@ server.on('error', (err) => {
 	throw err;
 });
 
-server.listen(8124, () => {
-	console.log('server bound');
+server.listen(process.env.PORT, () => {
+	console.log(`Stock Exchange Server available at localhost:${server.address().port}`);
 });
