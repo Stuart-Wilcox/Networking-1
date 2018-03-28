@@ -1,6 +1,6 @@
 class Company {
-	constructor(realtimeData, name, ticker, openPrice) {
-		this.realtimeData = realtimeData;
+	constructor(stockMarket, name, ticker, openPrice) {
+		this.stockMarket = stockMarket;
 
 		this.name = name;
 		this.ticker = ticker;
@@ -30,7 +30,7 @@ class Company {
 		} else if (type(order) == 'SellOrder') {
 			this.sellOrders.push(order);
 		}
-		this.realtimeData.notify();
+		this.stockMarket.notify();
 	}
 }
 

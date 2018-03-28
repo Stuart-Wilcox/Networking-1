@@ -7,7 +7,7 @@ class Request {
 	constructor(req) {
 		// split the lines
 		const lines = req.split('\r\n');
-		if(lines.length != 2) {
+		if(lines.length != 3 || lines[2] != '') {
 			throw Error("Invalid request. Incorrect amount of lines.");
 		}
 

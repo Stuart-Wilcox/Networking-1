@@ -1,6 +1,7 @@
 var net = require('net');
 
 let Request = require('./Request');
+let Response = require('./Response');
 
 let server = net.createServer(c => {
 	console.log('Client connected');
@@ -13,9 +14,14 @@ let server = net.createServer(c => {
 	});
 
 	c.on('data', (arg) => {
-		const req = arg.toString('ascii');
+		let req = arg.toString('ascii');
+
+		req = new Request(req);
+
 		console.log(req);
 
+		let res = new Response('OK');
+		c.write(res.toString());
 	});
 });
 

@@ -3,7 +3,7 @@ const assert = require('assert');
 const Request = require('../backend/Request');
 
 
-const reqString = 'REGISTER SME/TCP-1.0\r\nID: Alice CSeq: 1 Notification Port: 3700';
+const reqString = 'REGISTER SME/TCP-1.0\r\nID: Alice CSeq: 1 Notification Port: 3700\r\n';
 const req = new Request(reqString);
 
 assert.equal(req.type, 'REGISTER');
