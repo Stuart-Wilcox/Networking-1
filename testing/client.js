@@ -10,12 +10,12 @@ const sock = net.Socket();
 let count = 0;
 
 sock.connect({ port: 8124 }, (() => {
-  sock.write(`${type} SME/TCP-1.0\r\nID: Stu CSeq: 1\r\n`);
+  sock.write(`${type} SME/TCP-1.0\r\nID: Stu CSeq: ${count}\r\n`);
   sock.on('data', (arg) => {
     console.log(arg.toString('ascii'));
     if(count < 2){
       count++;
-      sock.write(`${type} SME/TCP-1.0\r\nID: Stu CSeq: 1\r\n`);
+      sock.write(`${type} SME/TCP-1.0\r\nID: Stu CSeq: ${count}\r\n`);
     } else {
       sock.end();
     }

@@ -1,9 +1,11 @@
 const StockMarket = require('./StockMarket');
 
+const dataGenerator = require('./dataGenerator');
+
 class RealtimeData extends StockMarket {
   constructor() {
     super();
-    this.companies = []; // get the companies somehow
+    this.companies = dataGenerator(this);
   }
 
   register(stockMarketDisplay) {
@@ -18,3 +20,5 @@ class RealtimeData extends StockMarket {
     super.notify();
   }
 }
+
+module.exports = RealtimeData;
