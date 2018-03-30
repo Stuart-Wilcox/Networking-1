@@ -1,12 +1,10 @@
-const dataManager = require('../models/dataManager');
+const realtimeData = require('../models/dataManager').getRealtimeData();
 
 module.exports = {
   type: 'LISTCOMPANIES',
   handle(req, res) {
     // res.headers.add('Data', ALL_THE_COMPANIES)
     const companies = [];
-
-    let realtimeData = dataManager.getRealtimeData();
 
     for (let i = 0; i < realtimeData.companies.length; i++) {
       companies.push({
