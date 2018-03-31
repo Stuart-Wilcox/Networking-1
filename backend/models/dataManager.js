@@ -1,11 +1,20 @@
 const RealtimeData = require('./RealtimeData');
 
-// basically a singleton to manage the realtime data across the application
+/**
+*Singleton class used for managing the available RealtimeData object across the application
+*@class Manager
+*/
 class Manager {
+  /**
+  *@constructor
+  */
   constructor() {
 
   }
 
+  /**
+  *@return {RealtimeData} The single instance of RealtimeData
+  */
   static getRealtimeData() {
     if (!Manager.realtimeData) {
       Manager.realtimeData = new RealtimeData();

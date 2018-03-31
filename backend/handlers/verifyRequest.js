@@ -1,6 +1,7 @@
 const Request = require('../sme/Request');
 
 /**
+*@exports
 *@param sock: the socket object corresponding to the connection
 *@param req: the  incoming requst, as a string
 */

@@ -3,17 +3,26 @@ const StockMarket = require('./StockMarket');
 const dataGenerator = require('./dataGenerator');
 
 class RealtimeData extends StockMarket {
+  /**
+  *@constructor
+  */
   constructor() {
     super();
     this.companies = dataGenerator(this);
   }
 
-  register(stockMarketDisplay) {
-    super.register(stockMarketDisplay);
+  /**
+  *@param {Display} display The Display to register
+  */
+  register(display) {
+    super.register(display);
   }
 
-  unRegister(stockMarketDisplay) {
-    super.unRegister(stockMarketDisplay);
+  /**
+  *@param {number} id The id of the Display to unregister
+  */
+  unRegister(id) {
+    super.unRegister(id);
   }
 
   notify() {

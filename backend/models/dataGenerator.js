@@ -1,5 +1,9 @@
 const Company = require('./Company');
 
+/**
+* A simple method to generate some fake company data
+*@exports
+*/
 module.exports = (realtimeData) => {
   const companies = [];
 

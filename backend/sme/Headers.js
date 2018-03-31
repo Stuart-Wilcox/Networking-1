@@ -7,6 +7,9 @@ class Headers {
 		this.values = [];
 		if (headers) {
 			headers = headers.replace(/: /g, ':'); // get rid of spacing after colon
+			headers = headers.replace(/, /g, ','); // get rid of spacing after comma
+			headers = headers.replace(/{ /g, '{'); // get rid of spacing after open brace
+
 			headers += ' '; // add a space on the end
 
 			// change the header string into key/value pairs
@@ -24,6 +27,12 @@ class Headers {
 					}
 				} else {
 					// append the character to value unless its a space
+					if(headers[i] == '"') {
+						value += headers[i];
+						while (headers[++i] != '"') {
+							value += headers[i];
+						}
+					}
 					if(headers[i] == ' ') {
 						state = true; // flip the state
 						this.add(key, value); // add the key/value pair

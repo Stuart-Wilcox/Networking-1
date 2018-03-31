@@ -6,9 +6,10 @@ let Headers = require('./Headers');
 
 class Server {
 	/**
-	*@param verify: callback used to verify the request
-	*@param success: callback used on a successful request verification
-	*@param failure: callback used for a failed request verification
+	*@constructor
+	*@param verify callback used to verify the request
+	*@param success callback used on a successful request verification
+	*@param failure callback used for a failed request verification
 	*/
 	constructor(verify, success, failure) {
 		this.server =  net.createServer((c) => {
@@ -24,6 +25,11 @@ class Server {
 
 				try {
 					req = verify(c, req);
+
+					req.headers.add('ID', c.id);
+					req.headers.add('RemoteAddress', c.remoteAddress);
+					req.headers.add('RemotePort', c.remotePort);
+
 				} catch (err) {
 					// log the failure. It is possiblle c.id is undefined
 					console.log(`${c.id} requests:\n${reqString}`);
@@ -43,6 +49,10 @@ class Server {
 
 				console.log(`Server response:\n${res.toString()}`);
 
+				if (req.type == 'UNREGISTER') {
+					c.end(res.toString());
+					return;
+				}
 				c.write(res.toString());
 			});
 		});
@@ -52,6 +62,10 @@ class Server {
 		});
 	}
 
+	/**
+	*Start the server
+	*@param {number} [port=8124] the port the server should listen on.
+	*/
 	listen(port) {
 		this.server.listen(port||8124, () => {
 			console.log(`Stock Exchange Server available at localhost:${this.server.address().port}\n\n\n`);

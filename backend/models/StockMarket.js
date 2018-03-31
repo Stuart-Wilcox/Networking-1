@@ -1,12 +1,28 @@
 class StockMarket{
+	/**
+	*@constructor
+	*/
 	constructor() {
 		this.displays = [];
 	}
-	register(stockMarketDisplay) {
-		this.displays.push(stockMarketDisplay);
+
+	/**
+	*@param {Display} display A Display object to register
+	*/
+	register(display) {
+		this.displays.push(display);
 	}
-	unRegister(stockMarketDisplay) {
-		this.displays.splice(this.displays.indexOf(stockMarketDisplay), 1);
+
+	/**
+	*@param {number} id The id of the display to unregister (integer)
+	*/
+	unRegister(id) {
+		for(let i = 0; i < this.displays.length; i++) {
+			if (this.displays[i].id == id) {
+				this.displays.splice(i, 1);
+				return;
+			}
+		}
 	}
 	notify() {
 		for(let i = 0; i < this.displays.length; i++) {

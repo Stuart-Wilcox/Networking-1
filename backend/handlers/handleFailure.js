@@ -2,6 +2,7 @@ const Headers = require('../sme/Headers');
 const Response = require('../sme/Response');
 
 /**
+*@exports
 *@param sock: the socket object corresponding to the connection
 *@param err: the error object indicating the reason for failure
 */

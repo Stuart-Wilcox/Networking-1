@@ -6,6 +6,7 @@ class Request {
 	*@param req is the request as a string
 	*/
 	constructor(req) {
+		//TODO: extend functionality to allow for JSON in headers
 		this.reqString = req;
 		// split the lines
 		const lines = req.split('\r\n');
