@@ -23,13 +23,15 @@ class Company {
 		return this.volume;
 	}
 
-	addOrder(order) {
+	addBuyOrder(order) {
 		// TODO check for a transaction
-		if(typeof(order) == 'BuyOrder') {
-			this.buyOrders.push(order);
-		} else if (type(order) == 'SellOrder') {
-			this.sellOrders.push(order);
-		}
+		this.buyOrders.push(order);
+		this.stockMarket.notify();
+	}
+
+	addSellOrder(order) {
+		// TODO check for a transaction
+		this.sellOrders.push(order);
 		this.stockMarket.notify();
 	}
 }

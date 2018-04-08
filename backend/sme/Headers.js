@@ -7,6 +7,8 @@ class Headers {
 		this.values = [];
 		if (headers) {
 			headers = headers.replace(/: /g, ':'); // get rid of spacing after colon
+			headers = headers.replace(/{ /g, '{'); // get rid of spacing after brace
+			headers = headers.replace(/, /g, ','); // get rid of spacing after comma
 			headers += ' '; // add a space on the end
 
 			// change the header string into key/value pairs
@@ -23,8 +25,16 @@ class Headers {
 						key += headers[i];
 					}
 				} else {
+					// get everything between quotation marks (spaces allowed)
+					if (headers[i] == '"') {
+						value += headers[i++];
+						while(headers[i] != '"') {
+							value += headers[i++];
+						}
+						value += headers[i] // add the closing quotation mark
+					}
 					// append the character to value unless its a space
-					if(headers[i] == ' ') {
+					else if(headers[i] == ' ') {
 						state = true; // flip the state
 						this.add(key, value); // add the key/value pair
 
@@ -35,6 +45,11 @@ class Headers {
 						value += headers[i];
 					}
 				}
+			}
+
+			// for the special case of data, parse it into an object
+			if (this.get('Data')) {
+				this.add('Data', JSON.parse(this.get('Data')));
 			}
 		}
 	}

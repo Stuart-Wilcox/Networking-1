@@ -9,6 +9,7 @@ class StockMarket{
 		this.displays.splice(this.displays.indexOf(stockMarketDisplay), 1);
 	}
 	notify() {
+		console.log('NOTIFY');
 		for(let i = 0; i < this.displays.length; i++) {
 			this.displays[i].update(this);
 		}

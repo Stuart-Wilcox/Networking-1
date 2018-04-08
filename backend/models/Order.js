@@ -5,7 +5,6 @@ class Order {
 		this.price = price;
 
 		this.company = company;
-		company.addOrder(this);
 	}
 
 	getPrice() {

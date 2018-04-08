@@ -1,8 +1,9 @@
-let Order require('./Order');
+let Order = require('./Order');
 
-class BuyOrder extends Order {
-	constructor(date, size, price) {
-		super(date, size, price);
+class BuyOrder extends Order{
+	constructor(company, date, size, price) {
+		super(company, date, size, price);
+		this.company.addBuyOrder(this);
 	}
 
 	getPrice() {
@@ -14,4 +15,4 @@ class BuyOrder extends Order {
 	}
 }
 
-modeule.exports = BuyOrder;
+module.exports = BuyOrder;
