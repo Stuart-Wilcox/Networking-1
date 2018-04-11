@@ -6,10 +6,11 @@ module.exports = {
     const buyOrders = {};
 
     for (let i = 0;  i < realtimeData.companies.length; i++) {
-      buyOrders[realtimeData.companies[i].ticker] = [];
+      const ticker = realtimeData.companies[i].ticker;
+      buyOrders[ticker] = [];
 
       for (let j = 0; j < realtimeData.companies[i].buyOrders.length; j++) {
-        buyOrders[realtimeData.companies[i].ticker].push(
+        buyOrders[ticker].push(
           {
             size: realtimeData.companies[i].buyOrders[j].size,
             price: realtimeData.companies[i].buyOrders[j].price,

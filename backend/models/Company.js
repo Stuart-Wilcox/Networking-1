@@ -33,14 +33,12 @@ class Company {
 	addBuyOrder(order) {
 		// TODO check for a transaction
 		this.buyOrders.push(order);
-
 		this.stockMarket.notify();
 	}
 
 	addSellOrder(order) {
 		// TODO check for a transaction
 		this.sellOrders.push(order);
-
 		this.stockMarket.notify();
 	}
 }

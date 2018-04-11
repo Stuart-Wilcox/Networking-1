@@ -26,8 +26,13 @@ function checkId(sock, req) {
 
   // check if person has been identified yet
   if (!sock.id) {
-    sock.id = req.headers.get('ID'); // get the new person's id
 
+    // this is the frist request and it must be a register request
+    if (!req.type === 'REGISTER') {
+        throw Error(`Initial request type expected to be REGISTER, but instead got type ${req.type}`);
+    }
+    sock.id = req.headers.get('ID'); // get the new person's id
+    req.headers.add('Address', sock.remotePort);
     console.log(`\tTrader "${sock.id}" at (${sock.remoteAddress}:${sock.remotePort }): is connected.\n`);
 
     // give the new person a random session number

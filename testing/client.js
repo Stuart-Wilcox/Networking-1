@@ -29,4 +29,8 @@ sock.connect({ port: 8124 }, (() => {
       sock.write(`UNREGISTER SME/TCP-1.0\r\nID: Stu CSeq: ${count++}\r\n`);
     }
   });
+
+  sock.on('end', (arg) => {
+
+  });
 }));

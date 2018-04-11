@@ -4,17 +4,18 @@ const SellOrder = require('../models/SellOrder');
 module.exports = {
   type: 'SELLORDER',
   handle(req, res) {
-    const data = JSON.parse(req.headers.get('Data')); // turn into an object
+    const data = req.headers.get('Data'); // get data object
 
     // figure out which company the buy order is for
     for (let i = 0; i < realtimeData.companies.length; i++) {
-      if (data[realtimeData.companies[i].ticker]) {
+      const ticker = realtimeData.companies[i].ticker;
+      if (data[ticker]) {
 
         const sellOrder = new SellOrder(
           realtimeData.companies[i],
-          data[realtimeData.companies[i].ticker].timestamp,
-          data[realtimeData.companies[i].ticker].size,
-          data[realtimeData.companies[i].ticker].price
+          data[ticker].timestamp,
+          data[ticker].size,
+          data[ticker].price
         );
       }
     }

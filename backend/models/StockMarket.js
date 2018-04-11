@@ -25,6 +25,7 @@ class StockMarket{
 		}
 	}
 	notify() {
+		// console.log('NOTIFY');
 		for(let i = 0; i < this.displays.length; i++) {
 			this.displays[i].update(this);
 		}
