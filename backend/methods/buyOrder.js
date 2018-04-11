@@ -12,7 +12,7 @@ module.exports = {
 
         const buyOrder = new BuyOrder(
           realtimeData.companies[i],
-          new Date(data[realtimeData.companies[i].ticker].timestamp),
+          data[realtimeData.companies[i].ticker].timestamp,
           data[realtimeData.companies[i].ticker].size,
           data[realtimeData.companies[i].ticker].price
         );

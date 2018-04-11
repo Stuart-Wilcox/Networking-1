@@ -8,8 +8,8 @@ class Order {
 	*@see BuyOrder
 	*@see SellOrder
 	*/
-	constructor(company, date, size, price) {
-		this.date = date;
+	constructor(company, timestamp, size, price) {
+		this.timestamp = timestamp;
 		this.size = size;
 		this.price = price;
 

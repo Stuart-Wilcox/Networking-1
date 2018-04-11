@@ -8,8 +8,9 @@ class SellOrder extends Order {
 	*@param {number} price
 	*@see Order
 	*/
-	constructor(date, size, price) {
-		super(date, size, price);
+	constructor(company, timestamp, size, price) {
+		super(company, timestamp, size, price);
+		company.addSellOrder(this);
 	}
 
 	getPrice() {
