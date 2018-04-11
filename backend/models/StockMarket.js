@@ -1,3 +1,9 @@
+/**
+* Interface for abstracting RealtimeData
+* @class StockMarket
+* @see RealtimeData
+* @export
+*/
 class StockMarket{
 	/**
 	*@constructor
@@ -14,7 +20,7 @@ class StockMarket{
 	}
 
 	/**
-	*@param {number} id The id of the display to unregister (integer)
+	*@param {Number} id The id of the display to unregister (integer)
 	*/
 	unRegister(id) {
 		for(let i = 0; i < this.displays.length; i++) {

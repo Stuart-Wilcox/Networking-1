@@ -1,3 +1,9 @@
+/**
+* Data type to represent a display. Displays are client's listeners which receive
+* notifications about new buy and sell orders
+* @class Display
+* @export
+*/
 class Display {
   /**
   *@constructor
@@ -11,6 +17,9 @@ class Display {
     this.id = id;
   }
 
+  /**
+  * Sends realtime data back to client on notification port
+  */
   update() {
     // TODO make the connection and send stuff here
   }

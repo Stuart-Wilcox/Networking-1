@@ -1,5 +1,12 @@
 let Order = require('./Order');
 
+/**
+* Data type to represent a buy order, which is attributed to a company
+* @class BuyOrder
+* @extends Order
+* @see {Order}
+* @export
+*/
 class BuyOrder extends Order {
 	/**
 	*@constructor

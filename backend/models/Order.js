@@ -1,3 +1,10 @@
+/**
+* Interface to abstract BuyOrder and SellOrder
+* @class Order
+* @see BuyOrder
+* @see SellOrder
+* @export
+*/
 class Order {
 	/**
 	*@constructor
