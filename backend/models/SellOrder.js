@@ -10,9 +10,11 @@ let Order = require('./Order');
 class SellOrder extends Order {
 	/**
 	*@constructor
-	*@param {Date} date
-	*@param {number} size
-	*@param {number} price
+	*@param {Company} company The company the Sell Order is for
+	*@param {Date} timestamp The timestamp of the Sell Order
+	*@param {number} size The volume of shares of the Sell Order
+	*@param {number} price The desired price at which the Sell Order should be bought
+	*@see Order
 	*/
 	constructor(company, timestamp, size, price) {
 		super(company, timestamp, size, price);
@@ -27,7 +29,7 @@ class SellOrder extends Order {
 	}
 
 	/**
-	* @param {Number} price The price of the sell order
+	* @param {Number} price Sets the price of the sell order
 	*/
 	setPrice(price) {
 		super.setPrice(price);

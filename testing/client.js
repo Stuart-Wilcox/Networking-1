@@ -26,6 +26,9 @@ sock.connect({ port: 8124 }, (() => {
       sock.write(`LISTSELLORDERS SME/TCP-1.0\r\nID: Stu CSeq: ${count++}\r\n`);
     }
     else if (count == 5) {
+      sock.write(`LISTCOMPANIES SME/TCP-1.0\r\nID: Stu CSeq: ${count++}\r\n`)
+    }
+    else if (count == 6) {
       sock.write(`UNREGISTER SME/TCP-1.0\r\nID: Stu CSeq: ${count++}\r\n`);
     }
   });

@@ -10,9 +10,9 @@ module.exports = {
       companies.push({
         name: realtimeData.companies[i].name,
         ticker: realtimeData.companies[i].ticker,
+        volume: realtimeData.companies[i].volume,
         openPrice: realtimeData.companies[i].openPrice,
-        currentPrice: realtimeData.companies[i].currentPrice,
-        closedPrice: realtimeData.companies[i].closedPrice,
+        currentPrice: realtimeData.companies[i].lastPrice,
       });
     }
 

@@ -20,7 +20,7 @@ class StockMarketDisplay {
   * @todo implement
   */
   update(realtimeData) {
-    // console.log('UPDATE');
+    console.log('UPDATE');
   }
 }
 

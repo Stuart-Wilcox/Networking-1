@@ -52,9 +52,44 @@ class Company {
 	* @see {BuyOrder}
 	*/
 	addBuyOrder(order) {
-		// TODO check for a transaction
-		this.buyOrders.push(order);
-		this.stockMarket.notify();
+		for(let i = 0; i <  this.sellOrders.length; i++) {
+			if (this.sellOrders[i].price === order.price) {
+				// a transaction will be made
+				const sellOrder = this.sellOrders[i];
+
+				// update volume and lastPrice
+				this.volume += Math.min(sellOrder.size, order.size);
+				this.lastPrice = order.price;
+
+				if(sellOrder.size > order.size) {
+					// more sellOrders than buyOrders
+
+					sellOrder.size -= order.size; // reduce the sell order size
+					// dont add the buyOrder
+
+					return;
+				}
+				else if (sellOrder.size < order.size) {
+					// more buyOrders than sellOrders
+
+					order.size -= sellOrder.size; // reduce the size of the buy order
+					this.sellOrders.splice(i, 1); // remove the sell order from the list
+
+					continue; // there could be more orders to make transactions on
+				}
+				else {
+					// same amount of sellOrder as buyOrders
+
+					this.sellOrders.splice(i, 1); // remove the sell order from the list
+					// dont add the buyOrder to the list
+
+					return;
+				}
+			}
+		}
+
+		this.buyOrders.push(order); // if we get here then the buyOrder needs to be added
+		this.stockMarket.notify(); // notify the new buyOrder
 	}
 
 	/**
@@ -64,9 +99,47 @@ class Company {
 	* @see {SellOrder}
 	*/
 	addSellOrder(order) {
-		// TODO check for a transaction
-		this.sellOrders.push(order);
-		this.stockMarket.notify();
+		for(let i = 0; i <  this.buyOrders.length; i++) {
+			if (this.buyOrders[i].price === order.price) {
+				// a transaction will be made
+				const buyOrder = this.buyOrders[i];
+
+				// update volume and lastPrice
+				this.volume += Math.min(buyOrder.size, order.size);
+				this.lastPrice = order.price;
+
+				if(buyOrder.size > order.size) {
+					// more buyOrders than sellOrders
+
+					buyOrder.size -= order.size; // reduce the sell order size
+					// dont add the buyOrder
+
+					this.stockMarket.notify(); // notify the new SellOrder
+					return;
+				}
+				else if (buyOrder.size < order.size) {
+					// more sellOrders than buyOrders
+
+					order.size -= buyOrder.size; // reduce the size of the buy order
+					this.buyOrders.splice(i, 1); // remove the sell order from the list
+
+					continue; // there could be more orders to make transactions on
+				}
+				else {
+					// same amount of sellOrder as buyOrders
+
+					this.buyOrders.splice(i, 1); // remove the sell order from the list
+					// dont add the buyOrder to the list
+
+					this.stockMarket.notify(); // notify the new SellOrder
+					return;
+				}
+			}
+		}
+
+
+		this.sellOrders.push(order); // if we get here then the buyOrder needs to be added
+		this.stockMarket.notify(); // notify the new SellOrder
 	}
 }
 
